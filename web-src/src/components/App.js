@@ -46,7 +46,7 @@ function App(props) {
             </View>
             <View gridArea='content' padding='size-200'>
               <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<Home />} runtime={props.runtime} ims={props.ims} />
                 <Route
                   path='/actions'
                   element={
@@ -54,7 +54,7 @@ function App(props) {
                   }
                 />
                 <Route path='/about' element={<About />} />
-                <Route path='/product' element={<Product />} />
+                <Route path='/product' runtime={props.runtime}  element={<Product />} ims={props.ims} />
               </Routes>
             </View>
           </Grid>

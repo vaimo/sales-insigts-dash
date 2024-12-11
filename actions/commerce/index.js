@@ -13,8 +13,7 @@
  *   - Make sure to validate these changes against your security requirements before deploying the action
  */
 
-/*global getCommerceOauthClient*/
-
+const { getCommerceOauthClient } = require('../oauth1a')
 // const fetch = require('node-fetch');
 const { Core } = require('@adobe/aio-sdk');
 const {

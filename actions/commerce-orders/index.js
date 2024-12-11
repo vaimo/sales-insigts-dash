@@ -13,11 +13,10 @@
  *   - Make sure to validate these changes against your security requirements before deploying the action
  */
 
+const { getCommerceOauthClient } = require('../oauth1a')
 
-const fetch = require('node-fetch')
 const { Core } = require('@adobe/aio-sdk')
-const { errorResponse, getBearerToken, stringParameters, checkMissingRequestInputs } = require('../utils')
-
+const { errorResponse, stringParameters, checkMissingRequestInputs } = require('../utils')
 // main function that will be executed by Adobe I/O Runtime
 async function main (params) {
   // create a Logger
@@ -31,7 +30,7 @@ async function main (params) {
     logger.debug(stringParameters(params))
 
     // check for missing request input parameters and headers
-    const requiredParams = [/* add required params */]
+    const requiredParams = [];
     const requiredHeaders = ['Authorization']
     const errorMessage = checkMissingRequestInputs(params, requiredParams, requiredHeaders)
     if (errorMessage) {
@@ -39,21 +38,26 @@ async function main (params) {
       return errorResponse(400, errorMessage, logger)
     }
 
-    // extract the user Bearer token from the Authorization header
-    const token = getBearerToken(params)
+    // Fetch Adobe Commerce
+    const client = getCommerceOauthClient(
+        {
+          url: params.COMMERCE_BASE_URL,
+          consumerKey: params.COMMERCE_CONSUMER_KEY,
+          consumerSecret: params.COMMERCE_CONSUMER_SECRET,
+          accessToken: params.COMMERCE_ACCESS_TOKEN,
+          accessTokenSecret: params.COMMERCE_ACCESS_TOKEN_SECRET,
+        },
+        logger
+    );
 
-    // replace this with the api you want to access
-    const apiEndpoint = 'https://adobeioruntime.net/api/v1'
+    console.log('client is there');
+    const result = await client.get(`orders?searchCriteria[sortOrders][0][field]=created_at&searchCriteria[sortOrders][0][direction]=DESC&searchCriteria[pageSize]=10&searchCriteria[currentPage]=1`);
 
-    // fetch content from external api endpoint
-    const res = await fetch(apiEndpoint)
-    if (!res.ok) {
-      throw new Error('request to ' + apiEndpoint + ' failed with status code ' + res.status)
-    }
-    const content = await res.json()
+      console.log(result);
+
     const response = {
       statusCode: 200,
-      body: content
+      body: result
     }
 
     // log the response status code
