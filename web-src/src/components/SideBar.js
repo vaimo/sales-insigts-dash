@@ -17,6 +17,9 @@ function SideBar () {
       <li className="SideNav-item">
         <NavLink className="SideNav-itemLink" activeClassName="is-selected" aria-current="page" to="/about">About App Builder</NavLink>
       </li>
+      <li className="SideNav-item">
+        <NavLink className="SideNav-itemLink" activeClassName="is-selected" aria-current="page" to="/product">Product</NavLink>
+      </li>
     </ul>
   )
 }
