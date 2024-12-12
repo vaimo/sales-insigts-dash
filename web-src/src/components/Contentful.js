@@ -33,7 +33,7 @@ const fetchContentfulEntries = async () => {
     }
 };
 
-export const About = () => {
+export const Contentful = () => {
     const [content, setContent] = useState([]);
 
     useEffect(() => {

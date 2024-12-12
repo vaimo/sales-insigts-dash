@@ -6,7 +6,7 @@ export const useCommerceProduct = (props, sku) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await callAction(props, 'codexpect/commerce', {sku: sku})
+            const result = await callAction(props, 'sales-insigts-dash/commerce', {sku: sku})
             setProduct(result.error ? "" : result);
         };
 

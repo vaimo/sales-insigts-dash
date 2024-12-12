@@ -9,7 +9,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import SideBar from './SideBar';
 import ActionsForm from './ActionsForm';
 import { Home } from './Home';
-import { About } from './About';
+import { Contentful } from './Contentful';
 import { Product } from './Product';
 
 function App(props) {
@@ -46,15 +46,25 @@ function App(props) {
             </View>
             <View gridArea='content' padding='size-200'>
               <Routes>
-                <Route path='/' element={<Home />} runtime={props.runtime} ims={props.ims} />
+                <Route
+                  path='/'
+                  element={<Home />}
+                  runtime={props.runtime}
+                  ims={props.ims}
+                />
                 <Route
                   path='/actions'
                   element={
                     <ActionsForm runtime={props.runtime} ims={props.ims} />
                   }
                 />
-                <Route path='/about' element={<About />} />
-                <Route path='/product' runtime={props.runtime}  element={<Product />} ims={props.ims} />
+                <Route path='/contentful' element={<Contentful />} />
+                <Route
+                  path='/product'
+                  runtime={props.runtime}
+                  element={<Product />}
+                  ims={props.ims}
+                />
               </Routes>
             </View>
           </Grid>
